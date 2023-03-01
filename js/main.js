@@ -64,6 +64,4 @@ const createObjectPicture = () => ({
 
 const PhotoObjects = Array.from({length:PICTURE_OBJECTS_QUANTITY}, createObjectPicture);
 
-console.log(
-  PhotoObjects
-)
+//console.log(PhotoObjects)
