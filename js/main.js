@@ -1,8 +1,8 @@
-const PICTURE_COUNT = 25;
+const PICTURE_OBJECTS_QUANTITY = 25;
 const AVATAR_COUNT = 6;
 const LIKE_MIN_COUNT = 15;
 const LIKE_MAX_COUNT = 200;
-const COMMENT_COUNT = 20;
+
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -17,10 +17,11 @@ const DESCRIPTIONS = [
   'Это мне муж купил',
   '#отдых',
   'Фотка с работы'
-  ];
+];
 
-const NAMES = ['Михаил', 'Илья', 'Денис', 'Егор', 'Игорь', 'Татьяна'];
+const NAMES = ['Михаил', 'Илья', 'Денис', 'Егор', 'Игорь', 'Татьяна', 'Максим', 'Артем'];
 
+//Функция возвращает случайное целое положительное число
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -28,35 +29,39 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomArrayElement = (elements) =>
-elements[getRandomInteger(0, elements.length - 1)];
+//Функция возвращает случайный элемент массива
+const getRandomArrayElements = (elements) => elements [getRandomInteger(0, elements.length - 1)];
 
-
-const createPicture = () => {
-(
-{
-id: getRandomInteger(1, 25),
-url: 'photos/${getRandomArrayElement(ID)}.jpg',
-description: getRandomArrayElement(DESCRIPTIONS),
-likes: getRandomInteger(LIKES_MIN, LIKES_MAX),
-comments:
-{
-commentId: getRandomArrayElement(ID),
-avatar: 'img/avatar-${getRandomArrayIntengerElement(1, 6)}.svg',
-message: getRandomArrayElement(MESSAGES),
-name: getRandomArrayElement(NAMES)
-}
-} );
-
-createPicture();
-
-const getArrays = Array.from(
-{length: PICTURES},
-createPicture
-);
-
-function getResult() {
-  return getArrays;
+// Функция для генерации уникального (неповторяющегося) числа из указанного дипазона
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
 }
 
-getResult();
+const generatePhotoId = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
+const generateUrl = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
+const generateCommentId = createRandomIdFromRangeGenerator(1, 1000);
+
+const createObjectPicture = () => ({
+  id: generatePhotoId(),
+  url: `photos/${generateUrl()}.jpg`,
+  description: getRandomArrayElements(DESCRIPTIONS),
+  likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
+  comments: {
+    commentId: generateCommentId,
+    avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+    message: getRandomArrayElements(MESSAGES),
+    name: getRandomArrayElements(NAMES)
+  }
+});
+// eslint-disable-next-line no-unused-vars
+const PhotoObjects = Array.from({length:PICTURE_OBJECTS_QUANTITY}, createObjectPicture);
+
+//console.log(PhotoObjects)
