@@ -39,13 +39,13 @@ const createObjectPicture = () => ({
   description: getRandomArrayElements(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
   comments: {
-    commentId: generateCommentId,
+    commentId: generateCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
     message: getRandomArrayElements(MESSAGES),
     name: getRandomArrayElements(NAMES)
   }
 });
 
-const photoObjects = Array.from({length:PICTURE_OBJECTS_QUANTITY}, createObjectPicture);
+const photoObjects = () => Array.from({length:PICTURE_OBJECTS_QUANTITY}, createObjectPicture);
 
 export {photoObjects};
