@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-import {photoObjects} from './data.js';
+import {picturesList, similarListFragment} from './rendering.js';
 
-//console.log(photoObjects);
+picturesList.appendChild(similarListFragment);
