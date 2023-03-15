@@ -1,3 +1,6 @@
-import {picturesList, similarListFragment} from './rendering.js';
+import {renderPhotoList} from './rendering-pictures.js';
+import {renderingBigPicture} from './rendering-bigPhoto.js';
+import './rendering-bigPhoto.js';
 
-picturesList.appendChild(similarListFragment);
+renderPhotoList();
+renderingBigPicture();

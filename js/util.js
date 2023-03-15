@@ -20,10 +20,12 @@ function createRandomIdFromRangeGenerator (min, max) {
     return currentValue;
   };
 }
-
+//Функция нажатия на клавишу Escape
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export {
   getRandomInteger,
   getRandomArrayElements,
-  createRandomIdFromRangeGenerator
+  createRandomIdFromRangeGenerator,
+  isEscapeKey
 };
