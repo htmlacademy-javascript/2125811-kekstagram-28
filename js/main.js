@@ -1,4 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-import {photoObjects} from './data.js';
+import {renderPhotoList} from './rendering-pictures.js';
+import {renderingBigPicture} from './rendering-bigPhoto.js';
+import './rendering-bigPhoto.js';
 
-//console.log(photoObjects);
+renderPhotoList();
+renderingBigPicture();

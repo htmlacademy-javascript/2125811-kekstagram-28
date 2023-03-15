@@ -33,12 +33,13 @@ const generatePhotoId = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUAN
 const generateUrl = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
 const generateCommentId = createRandomIdFromRangeGenerator(1, COMMENTS_ID_QUANTITY);
 
+
 const createObjectPicture = () => ({
   id: generatePhotoId(),
   url: `photos/${generateUrl()}.jpg`,
   description: getRandomArrayElements(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
-  comments: {
+  comment: {
     commentId: generateCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
     message: getRandomArrayElements(MESSAGES),
