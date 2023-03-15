@@ -6,10 +6,10 @@ import {
 
 const PICTURE_OBJECTS_QUANTITY = 25;
 const AVATAR_COUNT = 6;
-const LIKE_MIN_COUNT = 1000;
-const COMMENT_COUNT = 3;
+const LIKE_MIN_COUNT = 15;
 const LIKE_MAX_COUNT = 200;
-const COMMENTS_ID_QUANTITY = 15;
+const COMMENT_COUNT = 3;
+const COMMENTS_ID_QUANTITY = 1000;
 export {PICTURE_OBJECTS_QUANTITY, COMMENTS_ID_QUANTITY};
 
 const MESSAGES = [
@@ -49,7 +49,7 @@ const createObjectPicture = () => ({
   url: `photos/${generateUrl()}.jpg`,
   description: getRandomArrayElements(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
-  comments: Array.from({length: COMMENT_COUNT}, createComments),
+  comments: Array.from({length: getRandomInteger(1, COMMENTS_ID_QUANTITY)}, createComments),
 });
 
 

@@ -10,6 +10,8 @@ const bigPictureCommentsNum = document.querySelector('.comments-count');
 const bigPictureCommentsList = document.querySelector('.social__comments');
 const bigPictureDescription = document.querySelector('.social__caption');
 const socialCommentElement = bigPictureCommentsList.querySelector('.social__comment');
+const socialCommentElementCounter = pictureModalElement.querySelector('.social__comment-count');
+const socialCommentElementLoader = pictureModalElement.querySelector('.comments-loader');
 
 const renderingBigPicture = function () {
   const onBigPictureKeydown = (evt) => {
@@ -47,12 +49,15 @@ const renderingBigPicture = function () {
     pictureModalElement.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
     document.addEventListener('keydown', onBigPictureKeydown);
+    socialCommentElementCounter.classList.add('hidden');
+    socialCommentElementLoader.classList.add('hidden');
   };
 
   const closeBigPicture = function () {
     pictureModalElement.classList.add('hidden');
     bodyElement.classList.remove('modal-open');
     document.removeEventListener('keydown', onBigPictureKeydown);
+    bigPictureCommentsList.innerHTML = '';
   };
 
   picturesList.addEventListener('click', (evt) => {
