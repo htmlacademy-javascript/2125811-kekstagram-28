@@ -6,9 +6,10 @@ import {
 
 const PICTURE_OBJECTS_QUANTITY = 25;
 const AVATAR_COUNT = 6;
-const LIKE_MIN_COUNT = 15;
+const LIKE_MIN_COUNT = 1000;
+const COMMENT_COUNT = 3;
 const LIKE_MAX_COUNT = 200;
-const COMMENTS_ID_QUANTITY = 1000;
+const COMMENTS_ID_QUANTITY = 15;
 export {PICTURE_OBJECTS_QUANTITY, COMMENTS_ID_QUANTITY};
 
 const MESSAGES = [
@@ -24,7 +25,10 @@ const DESCRIPTIONS = [
   '#красивожитьнезапретишь',
   'Это мне муж купил',
   '#отдых',
-  'Фотка с работы'
+  'Фотка с работы',
+  'бедолага еще и эдиком назвали АхАхахАХ',
+  'Почему-то у них разговор как-то не задался',
+  'Визит как всегда на высоте , спасибо Вам)'
 ];
 
 const NAMES = ['Михаил', 'Илья', 'Денис', 'Егор', 'Игорь', 'Татьяна', 'Максим', 'Артем'];
@@ -33,20 +37,23 @@ const generatePhotoId = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUAN
 const generateUrl = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
 const generateCommentId = createRandomIdFromRangeGenerator(1, COMMENTS_ID_QUANTITY);
 
+const createComments = () => ({
+  commentId: generateCommentId(),
+  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+  message: getRandomArrayElements(MESSAGES),
+  name: getRandomArrayElements(NAMES)
+});
 
 const createObjectPicture = () => ({
   id: generatePhotoId(),
   url: `photos/${generateUrl()}.jpg`,
   description: getRandomArrayElements(DESCRIPTIONS),
   likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
-  comment: {
-    commentId: generateCommentId(),
-    avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
-    message: getRandomArrayElements(MESSAGES),
-    name: getRandomArrayElements(NAMES)
-  }
+  comments: Array.from({length: COMMENT_COUNT}, createComments),
 });
 
-const photoObjects = () => Array.from({length:PICTURE_OBJECTS_QUANTITY}, createObjectPicture);
+
+const photoObjects = () => Array.from({length: PICTURE_OBJECTS_QUANTITY},
+  createObjectPicture);
 
 export {photoObjects};
