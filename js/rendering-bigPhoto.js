@@ -12,9 +12,6 @@ const bigPictureDescription = document.querySelector('.social__caption');
 const socialCommentElement = bigPictureCommentsList.querySelector('.social__comment');
 const socialCommentElementCounter = pictureModalElement.querySelector('.social__comment-count');
 const socialCommentElementLoader = pictureModalElement.querySelector('.comments-loader');
-//let commentsShow = 0;
-//let commentis = [];
-//const COMMENT_PER_POSSITION = 5;
 
 const renderingBigPicture = () => {
   //функция при нажатии Escape
@@ -64,8 +61,8 @@ const renderingBigPicture = () => {
     pictureModalElement.classList.remove('hidden');
     bodyElement.classList.add('modal-open');
     document.addEventListener('keydown', onBigPictureKeydown);
-    //socialCommentElementCounter.classList.add('hidden');
-    //socialCommentElementLoader.classList.add('hidden');
+    socialCommentElementCounter.classList.add('hidden');
+    socialCommentElementLoader.classList.add('hidden');
   };
 
   //функция закрывания большого фото
@@ -91,22 +88,3 @@ const renderingBigPicture = () => {
 };
 
 export {renderingBigPicture};
-
-/* const renderComment = () => {
-
-  commentsShow += COMMENT_PER_POSSITION;
-  if (commentsShow >= commentis) {
-    socialCommentElementLoader.classList.add('hidden');
-    commentsShow = commentis.length;
-  } else {
-    socialCommentElementLoader.classList.remove('hidden');
-  }
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < commentsShow; i++) {
-    const commentElement = createComments(comments[i]);
-    fragment.append(commentElement);
-  }
-  bigPictureCommentsList.innerHTML = '';
-  bigPictureCommentsList.append(fragment);
-  socialCommentElementCounter.innerHTML = `${commentsShow} из <span class= "comments-count">${commentis.length}<span> комментариев`;
-}; */
