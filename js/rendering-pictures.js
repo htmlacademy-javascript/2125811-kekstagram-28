@@ -1,13 +1,14 @@
-import {photoObjects} from './data.js';
+import {createPhotoObjects} from './data.js';
 
 const picturesList = document.querySelector('.pictures');
 const pictureContent = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const photoObjectsArray = photoObjects();
+const photoObjectsArray = createPhotoObjects();
 
 const renderPhotoList = () => {
+
   const similarListFragment = document.createDocumentFragment();
 
   photoObjectsArray.forEach(({url, likes, comments}, index) => {

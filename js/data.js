@@ -53,7 +53,7 @@ const createObjectPicture = () => ({
 });
 
 
-const photoObjects = () => Array.from({length: PICTURE_OBJECTS_QUANTITY},
+const createPhotoObjects = () => Array.from({length: PICTURE_OBJECTS_QUANTITY},
   createObjectPicture);
 
-export {photoObjects};
+export {createPhotoObjects};
