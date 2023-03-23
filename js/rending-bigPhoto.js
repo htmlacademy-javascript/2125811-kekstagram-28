@@ -87,5 +87,4 @@ function onDocumentKeydown (evt) {
     closeBigPicture();
   }
 }
-
 export {openBigPicture, closeBigPicture};
