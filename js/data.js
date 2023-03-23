@@ -1,16 +1,14 @@
-import {
+import {getRandomPositiveInteger,
   getRandomArrayElements,
-  getRandomInteger,
-  createRandomIdFromRangeGenerator
+  getUniqueNumberFromRange
 } from './util.js';
 
-const PICTURE_OBJECTS_QUANTITY = 25;
+const PHOTO_OBJECTS_COUNT = 25;
 const AVATAR_COUNT = 6;
-const LIKE_MIN_COUNT = 15;
-const LIKE_MAX_COUNT = 200;
-//const COMMENT_COUNT = 5;
-const COMMENTS_ID_QUANTITY = 100;
-export {PICTURE_OBJECTS_QUANTITY, COMMENTS_ID_QUANTITY};
+const PHOTO_LIKES_MIN_COUNT = 15;
+const PHOTO_LIKES_MAX_COUNT = 200;
+const COMMENT_ID = 1000;
+const COMMENTS_COUNT = 50;
 
 const MESSAGES = [
   'Всё отлично!',
@@ -18,8 +16,9 @@ const MESSAGES = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
+
 const DESCRIPTIONS = [
   'Это я фоткал',
   '#красивожитьнезапретишь',
@@ -33,27 +32,28 @@ const DESCRIPTIONS = [
 
 const NAMES = ['Михаил', 'Илья', 'Денис', 'Егор', 'Игорь', 'Татьяна', 'Максим', 'Артем'];
 
-const generatePhotoId = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
-const generateUrl = createRandomIdFromRangeGenerator(1, PICTURE_OBJECTS_QUANTITY);
-const generateCommentId = createRandomIdFromRangeGenerator(1, COMMENTS_ID_QUANTITY);
 
-const createComments = () => ({
-  commentId: generateCommentId(),
-  avatar: `img/avatar-${getRandomInteger(1, AVATAR_COUNT)}.svg`,
+const generatedPhotoId = getUniqueNumberFromRange(1, PHOTO_OBJECTS_COUNT);
+const generatedCommentId = getUniqueNumberFromRange(1, COMMENT_ID);
+const generatedPhotoUrl = getUniqueNumberFromRange(1, PHOTO_OBJECTS_COUNT);
+
+const createComment = () => ({
+  commentId: generatedCommentId(),
+  avatar: `img/avatar-${getRandomPositiveInteger(1, AVATAR_COUNT)}.svg`,
   message: getRandomArrayElements(MESSAGES),
   name: getRandomArrayElements(NAMES)
 });
 
+
 const createObjectPicture = () => ({
-  id: generatePhotoId(),
-  url: `photos/${generateUrl()}.jpg`,
+  id: generatedPhotoId(),
+  url: `photos/${generatedPhotoUrl()}.jpg`,
   description: getRandomArrayElements(DESCRIPTIONS),
-  likes: getRandomInteger(LIKE_MIN_COUNT, LIKE_MAX_COUNT),
-  comments: Array.from({length: getRandomInteger(1, COMMENTS_ID_QUANTITY)}, createComments),
+  likes: getRandomPositiveInteger(PHOTO_LIKES_MIN_COUNT, PHOTO_LIKES_MAX_COUNT),
+  comments: Array.from({length: getRandomPositiveInteger(1, COMMENTS_COUNT)}, createComment),
 });
 
 
-const createPhotoObjects = () => Array.from({length: PICTURE_OBJECTS_QUANTITY},
-  createObjectPicture);
+const createObjectsPictures = () => Array.from({length:PHOTO_OBJECTS_COUNT}, createObjectPicture);
 
-export {createPhotoObjects};
+export {createObjectsPictures};
