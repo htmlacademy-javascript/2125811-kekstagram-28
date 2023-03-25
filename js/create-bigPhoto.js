@@ -7,6 +7,7 @@ const commentsListElement = document.querySelector('.social__comments');
 const commentCountElement = document.querySelector('.social__comment-count');
 const commentLoaderElement = document.querySelector('.comments-loader');
 
+//Функция подставляет определеный объект в DOM элемент
 const createBigPicture = ({url, description, likes, comments}) => {
   bigPictureElement.querySelector('.big-picture__img > img').src = url;
   bigPictureElement.querySelector('.social__caption').textContent = description;
@@ -14,14 +15,18 @@ const createBigPicture = ({url, description, likes, comments}) => {
   bigPictureElement.querySelector('.comments-count').textContent = comments.length;
 };
 
+//Функция очищает список комментов и скрывает кпопку "Загрузить еще"
 const removeComments = () => {
   commentsListElement.innerHTML = '';
   commentLoaderElement.classList.remove('hidden');
 };
 
-const commentsFragment = document.createDocumentFragment();
-
+//Подставляем данные определенного объекта в DOM, cоздаем список комментов
 const createComments = (comments) => {
+  //Создаем коробочку
+  const commentsFragment = document.createDocumentFragment();
+
+  //Создаем шаблон коммента
   const comment = commentTemplateElement.cloneNode(true);
   removeComments();
 
@@ -37,8 +42,12 @@ const createComments = (comments) => {
   commentsListElement.appendChild(commentsFragment);
 };
 
+//Функция загрузки комментов
 const loadComments = () => {
+  //Ищем живых потомков из списка
   const comments = commentsListElement.children;
+
+  //Задаем пользовательские атрибуты для кнопки "Загрузить еще"
   const lowerLimit = Number(commentLoaderElement.dataset.value);
   let upperLimit = lowerLimit + COMMENTS_COUNT_MIN;
   const maxValue = Number(commentLoaderElement.dataset.maxValue);
@@ -55,24 +64,27 @@ const loadComments = () => {
   commentCountElement.innerHTML = `${upperLimit} из <span class="comments-count">${maxValue}</span> комментариев`;
 };
 
-function onButtonClick() {
-  loadComments();
-}
+//Функция вызова функции загрузки комментов
+const onButtonClick = () => loadComments();
 
+//Функция открытия большой фотки
 const openBigPicture = (picture) => {
   bigPictureElement.classList.remove('hidden');
   document.body.classList.add('modal-open');
   createBigPicture(picture);
   createComments(picture.comments);
 
+  //задаю начальные пользовательские атрибуты
   commentLoaderElement.dataset.value = 0;
   commentLoaderElement.dataset.maxValue = picture.comments.length;
   loadComments();
 
+  //Обработчик кнопки "Загрузить еще"
   commentLoaderElement.addEventListener('click', onButtonClick);
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
+//Функция закрытия большой фотки
 const closeBigPicture = () => {
   bigPictureElement.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -81,11 +93,13 @@ const closeBigPicture = () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 };
 
+//Функция нажатия кнопки ESC на окне
 function onDocumentKeydown (evt) {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeBigPicture();
   }
 }
+
 
 export {openBigPicture, closeBigPicture};
