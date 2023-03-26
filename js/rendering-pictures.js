@@ -10,7 +10,7 @@ const createPictures = (pictures) => {
   const picturesFragment = document.createDocumentFragment();
 
   pictures.forEach(({id, url, likes, comments}) => {
-    //Клонирую шаблон
+    //Клонирую шаблоjн
     const pictureElement = pictureTemplateElement.cloneNode(true);
     pictureElement.dataset.id = id;
     pictureElement.querySelector('.picture__img').src = url;
