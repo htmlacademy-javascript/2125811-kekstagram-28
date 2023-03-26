@@ -56,10 +56,11 @@ const loadComments = () => {
     upperLimit = maxValue;
     commentLoaderElement.classList.add('hidden');
   }
-
+  //Перебираю масивоподобный объект, forEach перебирает весь масив, что не нужно
   for (let i = lowerLimit; i < upperLimit; i++) {
     comments[i].classList.remove('hidden');
   }
+
   commentLoaderElement.dataset.value = upperLimit;
   commentCountElement.innerHTML = `${upperLimit} из <span class="comments-count">${maxValue}</span> комментариев`;
 };

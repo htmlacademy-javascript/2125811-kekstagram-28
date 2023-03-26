@@ -14,6 +14,7 @@ pictureContainerElement.addEventListener ('click', (evt) => {
   //Делегирование потомку
   const picture = evt.target.closest('.picture');
   if (picture) {
+    evt.preventDefault();
     //Ищу в массиве совпадение айдишника
     const currentPicture = pictures.find((item) => item.id === Number(picture.dataset.id));
     //Отрисовка большой фотки
