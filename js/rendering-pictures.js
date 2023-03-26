@@ -1,27 +1,25 @@
-import {photoObjects} from './data.js';
-
-const picturesList = document.querySelector('.pictures');
-const pictureContent = document.querySelector('#picture')
+const picturesListElement = document.querySelector('.pictures');
+const pictureTemplateElement = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const photoObjectsArray = photoObjects();
+//Функция подставляет данные в элементы DOM и добавляет список миниатюр
+const createPictures = (pictures) => {
 
-const renderPhotoList = () => {
-  const similarListFragment = document.createDocumentFragment();
+  //сделал контейнер
+  const picturesFragment = document.createDocumentFragment();
 
-  photoObjectsArray.forEach(({url, likes, comment}, index) => {
-    const pictureElement = pictureContent.cloneNode(true);
-    pictureElement.querySelector('.picture__img').id = index;
+  pictures.forEach(({id, url, likes, comments}) => {
+    //Клонирую шаблон
+    const pictureElement = pictureTemplateElement.cloneNode(true);
+    pictureElement.dataset.id = id;
     pictureElement.querySelector('.picture__img').src = url;
+    pictureElement.querySelector('.picture__comments').textContent = comments.length;
     pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comment.commentId;
-    similarListFragment.appendChild(pictureElement);
-  });
+    picturesFragment.append(pictureElement);
 
-  picturesList.appendChild(similarListFragment);
+  });
+  picturesListElement.append(picturesFragment);
 };
 
-export {renderPhotoList, picturesList, photoObjectsArray};
-
-
+export {createPictures};
