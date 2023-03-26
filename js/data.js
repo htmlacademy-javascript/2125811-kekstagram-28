@@ -16,7 +16,7 @@ const MESSAGES = [
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
   'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
-  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
+  'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
 const DESCRIPTIONS = [
@@ -37,6 +37,7 @@ const generatedPhotoId = getUniqueNumberFromRange(1, PHOTO_OBJECTS_COUNT);
 const generatedCommentId = getUniqueNumberFromRange(1, COMMENT_ID);
 const generatedPhotoUrl = getUniqueNumberFromRange(1, PHOTO_OBJECTS_COUNT);
 
+//Функция для создания одного коментария
 const createComment = () => ({
   commentId: generatedCommentId(),
   avatar: `img/avatar-${getRandomPositiveInteger(1, AVATAR_COUNT)}.svg`,
@@ -44,7 +45,7 @@ const createComment = () => ({
   name: getRandomArrayElements(NAMES)
 });
 
-
+//Функция для создания объекста с данными
 const createObjectPicture = () => ({
   id: generatedPhotoId(),
   url: `photos/${generatedPhotoUrl()}.jpg`,
@@ -53,7 +54,7 @@ const createObjectPicture = () => ({
   comments: Array.from({length: getRandomPositiveInteger(1, COMMENTS_COUNT)}, createComment),
 });
 
-
+//Функция для создания масивов(25шт) с данными
 const createObjectsPictures = () => Array.from({length:PHOTO_OBJECTS_COUNT}, createObjectPicture);
 
 export {createObjectsPictures};

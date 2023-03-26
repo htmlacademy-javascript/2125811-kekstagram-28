@@ -3,10 +3,14 @@ const pictureTemplateElement = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const picturesFragment = document.createDocumentFragment();
-
+//Функция подставляет данные в элементы DOM и добавляет список миниатюр
 const createPictures = (pictures) => {
+
+  //сделал контейнер
+  const picturesFragment = document.createDocumentFragment();
+
   pictures.forEach(({id, url, likes, comments}) => {
+    //Клонирую шаблон
     const pictureElement = pictureTemplateElement.cloneNode(true);
     pictureElement.dataset.id = id;
     pictureElement.querySelector('.picture__img').src = url;
@@ -14,7 +18,6 @@ const createPictures = (pictures) => {
     pictureElement.querySelector('.picture__likes').textContent = likes;
     picturesFragment.append(pictureElement);
 
-    picturesFragment.append(pictureElement);
   });
   picturesListElement.append(picturesFragment);
 };
