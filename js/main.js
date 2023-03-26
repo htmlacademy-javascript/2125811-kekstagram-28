@@ -1,2 +1,2 @@
-import './rending-gallery.js';
+import './gallery.js';
 import './form.js';
