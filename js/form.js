@@ -86,3 +86,6 @@ const onFormSubmit = (evt) => {
 fileField.addEventListener('change', onFileInputChange);
 buttonСloseForm.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
+
+//временая мера
+showModal();
