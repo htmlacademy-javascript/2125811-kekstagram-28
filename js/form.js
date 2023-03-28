@@ -1,3 +1,6 @@
+import {resetValueScale} from './scale.js';
+import {resetEffects} from './effects.js';
+
 const MAX_HASHTAG_COUNT = 5;
 const TAG_ERROR_TEXT = 'Не правильно заполнены хэштеги';
 
@@ -14,7 +17,8 @@ const commentField = document.querySelector('.text__description');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper'
+  errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__field-wrapper-error'
 });
 
 //Функция открытия форма редактирования изображения
@@ -27,8 +31,9 @@ const showModal = () => {
 //Функция закрытия  форма редактирования изображения;
 const hideModal = () => {
   form.reset();
-  //resetScale();
-  //resetEffects();
+  resetValueScale();
+  resetEffects();
+  pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeyDown);
@@ -86,3 +91,4 @@ const onFormSubmit = (evt) => {
 fileField.addEventListener('change', onFileInputChange);
 buttonСloseForm.addEventListener('click', onCancelButtonClick);
 form.addEventListener('submit', onFormSubmit);
+
