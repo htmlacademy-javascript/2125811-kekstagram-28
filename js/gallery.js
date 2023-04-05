@@ -2,6 +2,7 @@ import {createObjectsPictures} from './data.js';
 import {createPictures} from './rending-photos.js';
 import {openBigPicture, closeBigPicture} from './rending-bigPhoto.js';
 
+
 const pictureContainerElement = document.querySelector('.pictures');
 const closeButtonElement = document.querySelector('.big-picture__cancel');
 
@@ -26,3 +27,5 @@ pictureContainerElement.addEventListener ('click', (evt) => {
 closeButtonElement.addEventListener('click', () =>{
   closeBigPicture();
 });
+
+
