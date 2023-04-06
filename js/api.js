@@ -1,3 +1,5 @@
+import {showAlert} from './util.js';
+
 const BASE_URL = 'https://28.javascript.pages.academy/kekstagram';
 const Route = {
   GET_DATA: '/data',
@@ -16,7 +18,7 @@ const load = (route, errorText, method = Method.GET, body = null) =>
   fetch(`${BASE_URL}${route}`, {method, body})
     .then((response) => {
       if (!response.ok) {
-        throw new Error();
+        showAlert(errorText);
       }
       return response.json();
     })

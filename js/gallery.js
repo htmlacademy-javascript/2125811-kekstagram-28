@@ -1,13 +1,14 @@
-import {createObjectsPictures} from './data.js';
+//import {createObjectsPictures} from './data.js';
 import {createPictures} from './rending-photos.js';
 import {openBigPicture, closeBigPicture} from './rending-bigPhoto.js';
+import {getData} from './api.js';
 
 
 const pictureContainerElement = document.querySelector('.pictures');
 const closeButtonElement = document.querySelector('.big-picture__cancel');
 
 //Отрисовка миниатюр
-const pictures = createObjectsPictures();
+const pictures = await getData();
 createPictures(pictures);
 
 //Обрабочик события по клику на миниатюру
@@ -21,6 +22,7 @@ pictureContainerElement.addEventListener ('click', (evt) => {
     //Отрисовка большой фотки
     openBigPicture(currentPicture);
   }
+
 });
 
 //Обработчик по крестику(ESC)
