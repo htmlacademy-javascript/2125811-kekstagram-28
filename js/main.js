@@ -1,5 +1,7 @@
 import './gallery.js';
 import './form.js';
-import './scale.js';
+import './validation.js';
 import './effects.js';
+import './scale.js';
+
 

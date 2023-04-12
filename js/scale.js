@@ -11,9 +11,9 @@ const valueControlField = document.querySelector('.scale__control--value');
 const zoomableImage = document.querySelector('.img-upload__preview img');
 
 
-const changeScale = () => {
-  valueControlField.value = `${persentScale}%`;
-  zoomableImage.style.transform = `scale(${imageScale / 100})`;
+const changeScale = (scale) => {
+  valueControlField.value = `${scale}%`;
+  zoomableImage.style.transform = `scale(${scale / 100})`;
 };
 
 //Функция уменишает  маштаб
@@ -21,7 +21,7 @@ const decreaseScale = () => {
   if (persentScale > MIN_VALUE_SCALE) {
     persentScale = persentScale - SCALE_STEP;
     imageScale = imageScale - SCALE_STEP;
-    changeScale();
+    changeScale(persentScale);
   }
 };
 
@@ -30,7 +30,7 @@ const increaseScale = () => {
   if (persentScale < MAX_VALUE_SCALE) {
     persentScale = persentScale + SCALE_STEP;
     imageScale = imageScale + SCALE_STEP;
-    changeScale();
+    changeScale(persentScale);
   }
 };
 
