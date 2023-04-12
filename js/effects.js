@@ -99,7 +99,7 @@ const onEffectClick = (evt) => {
   updateSlider();
 };
 
-//
+
 const onSliderUpdate = () => {
   const sliderValue = sliderElement.noUiSlider.get();
   pictureElement.style.filter = isDefaultValue()

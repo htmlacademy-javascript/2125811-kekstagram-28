@@ -22,4 +22,5 @@ const createPictures = (pictures) => {
   picturesListElement.append(picturesFragment);
 };
 
+
 export {createPictures};
