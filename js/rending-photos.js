@@ -1,11 +1,11 @@
-const picturesListElement = document.querySelector('.pictures');
 const pictureTemplateElement = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
 //Функция подставляет данные в элементы DOM и добавляет список миниатюр
-const createPictures = (pictures) => {
-
+const renderThumbnails = (pictures, container) => {
+  container.querySelectorAll('.picture')
+    .forEach((element) => element.remove());
   //сделал контейнер
   const picturesFragment = document.createDocumentFragment();
 
@@ -19,8 +19,8 @@ const createPictures = (pictures) => {
     picturesFragment.append(pictureElement);
 
   });
-  picturesListElement.append(picturesFragment);
+  container.append(picturesFragment);
 };
 
 
-export {createPictures};
+export {renderThumbnails};
