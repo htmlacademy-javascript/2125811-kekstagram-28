@@ -1,39 +1,27 @@
-//import {createObjectsPictures} from './data.js';
-import {createPictures} from './rending-photos.js';
-import {openBigPicture, closeBigPicture} from './rending-bigPhoto.js';
-import {getData} from './api.js';
-import {showAlert} from './util.js';
+import { renderThumbnails } from './rending-photos.js';
+import { openBigPicture, closeBigPicture } from './rending-bigPhoto.js';
 
-
-const pictureContainerElement = document.querySelector('.pictures');
+const containerElement = document.querySelector('.pictures');
 const closeButtonElement = document.querySelector('.big-picture__cancel');
 
 
-try {
-  //Отрисовка миниатюр
-  const pictures = await getData();
-  createPictures(pictures);
-  //Обрабочик события по клику на миниатюру
-  pictureContainerElement.addEventListener ('click', (evt) => {
-    //Делегирование потомку
-    const picture = evt.target.closest('.picture');
-    if (picture) {
+const getGallery = (currentPictures) => {
+  renderThumbnails(currentPictures, containerElement);
+
+  containerElement.addEventListener('click', (evt) => {
+    const thumbnail = evt.target.closest('.picture');
+    if (thumbnail) {
       evt.preventDefault();
-      //Ищу в массиве совпадение айдишника
-      const currentPicture = pictures.find((item) => item.id === Number(picture.dataset.id));
-      //Отрисовка большой фотки
+      const currentPicture = currentPictures.find((item) => item.id === Number(thumbnail.dataset.id));
       openBigPicture(currentPicture);
     }
   });
-
-} catch (err) {
-  showAlert(err.message);
-}
+};
 
 
 //Обработчик по крестику(ESC)
-closeButtonElement.addEventListener('click', () =>{
+closeButtonElement.addEventListener('click', () => {
   closeBigPicture();
 });
 
-
+export {getGallery};
