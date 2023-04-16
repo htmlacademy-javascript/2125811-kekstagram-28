@@ -7,6 +7,7 @@ import {getData} from './api.js';
 import { showAlert } from './util.js';
 import {getFilterPictures, init} from './filters.js';
 import {debounce} from './util.js';
+import './upload-picture.js';
 
 try {
   const data = await getData();
